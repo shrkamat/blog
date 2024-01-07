@@ -1,0 +1,115 @@
+---
+title: "useEffect in React: Let's Chat and Unravel This Mystery Together"
+date: "2024-01-07"
+author: "Vignesh Iyer"
+description: "Join me in a friendly conversation as we demystify the React useEffect hook. We'll explore common misunderstandings, share personal insights, and provide practical examples to transform confusion into clarity."
+tags: ["React", "useEffect", "JavaScript", "Web Development", "Hooks"]
+---
+
+# useEffect in React: Let's Chat and Unravel This Mystery Together
+
+## Hey There, Fellow React Enthusiast!
+
+You know, I've been right where you are, staring at the screen, wondering why `useEffect` can feel like a riddle wrapped in a mystery. Let’s take a journey together through this, shall we?
+
+## The Missteps We've All Made
+
+### 1. Remember When We Overdid Data Transformations?
+
+Yeah, I've been guilty of this too. Picture this scenario:
+
+```javascript
+useEffect(() => {
+  const filteredItems = items.filter(/* some complex logic */);
+  setProcessedItems(filteredItems);
+}, [items]);
+```
+
+I used to think, "Hey, this is React's way!" But then, it dawned on me: Why not just use `useMemo`?
+
+```javascript
+const processedItems = useMemo(() => items.filter(/* same logic */), [items]);
+```
+
+Suddenly, everything became simpler and cleaner. It was one of those "Eureka!" moments.
+
+### 2. The Whole Derived State Saga
+
+Let me tell you about a time I had a component that needed a combined name:
+
+```javascript
+const [fullName, setFullName] = useState("");
+useEffect(() => {
+  setFullName(`${firstName} ${lastName}`);
+}, [firstName, lastName]);
+```
+
+I was making things harder for myself. Why not just:
+
+```javascript
+const fullName = `${firstName} ${lastName}`;
+```
+
+It was like React gently nudging me towards simplicity.
+
+### 3. That Time with Event Handling
+
+I bet you've been here too. Trying to handle a click event inside `useEffect`. What a maze that was!
+
+**Old Way**:
+
+```javascript
+useEffect(() => {
+  if (buttonClicked) {
+    // Some action
+  }
+}, [buttonClicked]);
+```
+
+But then, it hit me:
+
+**New Way**:
+
+```javascript
+const handleClick = () => {
+  // That same action
+};
+```
+
+It felt like clearing fog from my glasses. Events belong in event handlers, not in `useEffect`.
+
+### 4. External World and useEffect
+
+I used to throw everything into `useEffect`, even when it wasn't necessary. But here’s the thing: `useEffect` is perfect for dealing with the external world - fetching data, subscriptions, you name it.
+
+**For Example**:
+
+```javascript
+useEffect(() => {
+  const subscription = someExternalDataSource.subscribe();
+  return () => {
+    subscription.unsubscribe();
+  };
+}, []);
+```
+
+This was where `useEffect` really made sense. It's about connecting React to the outside world.
+
+## The Cheat Sheet I Made for Myself (And Now You)
+
+Let's break it down, real simple:
+
+| Doing This? | Maybe You're Doing This | Try This Instead | Why It's Better |
+|-------------|-------------------------|------------------|-----------------|
+| Transforming Data | `useEffect` for data based on props/state. | `useMemo` for the win. | No more unnecessary renders. |
+| Deriving State from Props | Extra state + `useEffect`. | Direct computation. | It's like taking a shortcut. |
+| Handling Events | Event logic in `useEffect`. | Straight in the event handler. | It's direct and clear. |
+| Lifecycle Hooks (Mounting and More) | Misplaced non-external operations. | Keep it for external stuff only. | It's about context and relevance. |
+| Dependencies | Overthinking them in `useEffect`. | Thoughtful, minimal dependencies. | No more render nightmares. |
+| Cleanup | Forgetting the cleanup. | Never skip cleanup. | Avoid those sneaky memory leaks. |
+| Error Handling | Ignoring it in `useEffect`. | Embrace error boundaries & try-catch. | Keep your app sturdy and resilient. |
+
+
+## Before You Go
+
+So, what do you think? `useEffect` isn't that cryptic, right? It's all about finding the right tool for the job and keeping things as uncomplicated as possible. Remember, every line of code is a conversation with React. Keep it simple, keep it neat, and let React do its thing. Happy coding, my friend!
