@@ -1,9 +1,10 @@
+import CopyToClipboard from "@/components/CopyToClipboard";
 import Footer from "@/components/footer";
 import { ModeToggle } from "@/components/mode-toggle";
 import ScrollProgress from "@/components/scroll-progress";
 import fs from "fs";
 import matter from "gray-matter";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, Copy } from "lucide-react";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import Link from "next/link";
 import path from "path";
@@ -55,7 +56,10 @@ export default function Page({ params }: any) {
               <Link href="/">
                 <ArrowLeft className="cursor-pointer" />
               </Link>
-              <div className="text-lg font-bold">{props.fontMatter.title}</div>
+              <div className="text-lg font-bold flex items-center gap-2 group ">
+                {props.fontMatter.title}
+                <CopyToClipboard />
+              </div>
             </div>
             <ModeToggle />
           </div>
