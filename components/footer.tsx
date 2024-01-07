@@ -11,7 +11,7 @@ const Footer = () => {
           target="_blank"
           rel="noreferrer noopener"
         >
-          Let's talk!
+          Let&apos;s talk!
         </a>
       </div>
     </footer>
