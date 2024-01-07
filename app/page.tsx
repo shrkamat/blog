@@ -16,6 +16,7 @@ import { ModeToggle } from "@/components/mode-toggle";
 import { Switch } from "@/components/ui/switch";
 import { useState } from "react";
 import { Label } from "@/components/ui/label";
+import Footer from "@/components/footer";
 
 export default function Home() {
   const blogDir = "blogs";
@@ -32,7 +33,7 @@ export default function Home() {
     };
   });
   return (
-    <main className="container pt-10 px-20 flex min-h-screen flex-col bg-background ">
+    <main className="container pt-10 flex min-h-screen flex-col bg-background ">
       <header className="h-10 flex justify-between">
         <div className="underline text-2xl">Vignesh Iyer</div>
         <ModeToggle />
@@ -51,7 +52,7 @@ export default function Home() {
                 <CardContent className="px-4">
                   <p>{blog.meta.description}</p>
                 </CardContent>
-                <CardFooter className="flex gap-2 px-4">
+                <CardFooter className="flex gap-2 px-4 overflow-x-hidden pt-1">
                   {blog.meta.tags.map((tag, index) => {
                     return (
                       <Badge
@@ -69,6 +70,7 @@ export default function Home() {
           ))}
         </div>
       </section>
+      <Footer />
     </main>
   );
 }

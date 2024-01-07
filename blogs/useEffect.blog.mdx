@@ -1,16 +1,21 @@
 ---
-title: "useEffect in React: Let's Chat and Unravel This Mystery Together"
+title: "useEffect: Most Notorious of Them All!"
 date: "2024-01-07"
 author: "Vignesh Iyer"
 description: "Join me in a friendly conversation as we demystify the React useEffect hook. We'll explore common misunderstandings, share personal insights, and provide practical examples to transform confusion into clarity."
 tags: ["React", "useEffect", "JavaScript", "Web Development", "Hooks"]
+highlightWords: ["useEffect"]
 ---
 
-# useEffect in React: Let's Chat and Unravel This Mystery Together
+# useEffect: Most Notorious of Them All!
 
-## Hey There, Fellow React Enthusiast!
+## Greetings, Seekers of React Enlightenment!
 
-You know, I've been right where you are, staring at the screen, wondering why `useEffect` can feel like a riddle wrapped in a mystery. Let’s take a journey together through this, shall we?
+Ever found yourself entangled in the intricate dance of React's `useEffect`? You're definitely not alone! This hook, in all its power and complexity, has been at the heart of numerous coding puzzles that I, too, have navigated. Picture it as that mysterious figure in a suspense film – compelling yet perplexing, drawing both admiration and bewilderment.
+
+Together, we're going to peel back the layers of `useEffect`, venturing into its labyrinthine depths. We’ll explore why it's often seen as the most intriguing and challenging aspect of the React ecosystem. This journey won't just be about dissecting code; it's an expedition to understand the very soul of this enigmatic hook.
+
+So, fasten your seatbelts. Our exploration into the world of `useEffect` promises to be as enlightening as it is exhilarating. Let's start this adventure with a sense of curiosity and the eagerness to unravel one of React's most captivating mysteries!
 
 ## The Missteps We've All Made
 
@@ -99,17 +104,24 @@ This was where `useEffect` really made sense. It's about connecting React to the
 
 Let's break it down, real simple:
 
-| Doing This? | Maybe You're Doing This | Try This Instead | Why It's Better |
-|-------------|-------------------------|------------------|-----------------|
-| Transforming Data | `useEffect` for data based on props/state. | `useMemo` for the win. | No more unnecessary renders. |
-| Deriving State from Props | Extra state + `useEffect`. | Direct computation. | It's like taking a shortcut. |
-| Handling Events | Event logic in `useEffect`. | Straight in the event handler. | It's direct and clear. |
-| Lifecycle Hooks (Mounting and More) | Misplaced non-external operations. | Keep it for external stuff only. | It's about context and relevance. |
-| Dependencies | Overthinking them in `useEffect`. | Thoughtful, minimal dependencies. | No more render nightmares. |
-| Cleanup | Forgetting the cleanup. | Never skip cleanup. | Avoid those sneaky memory leaks. |
-| Error Handling | Ignoring it in `useEffect`. | Embrace error boundaries & try-catch. | Keep your app sturdy and resilient. |
-
+| Doing This?                         | Maybe You're Doing This                    | Try This Instead                      | Why It's Better                     |
+| ----------------------------------- | ------------------------------------------ | ------------------------------------- | ----------------------------------- |
+| Transforming Data                   | `useEffect` for data based on props/state. | `useMemo` for the win.                | No more unnecessary renders.        |
+| Deriving State from Props           | Extra state + `useEffect`.                 | Direct computation.                   | It's like taking a shortcut.        |
+| Handling Events                     | Event logic in `useEffect`.                | Straight in the event handler.        | It's direct and clear.              |
+| Lifecycle Hooks (Mounting and More) | Misplaced non-external operations.         | Keep it for external stuff only.      | It's about context and relevance.   |
+| Dependencies                        | Overthinking them in `useEffect`.          | Thoughtful, minimal dependencies.     | No more render nightmares.          |
+| Cleanup                             | Forgetting the cleanup.                    | Never skip cleanup.                   | Avoid those sneaky memory leaks.    |
+| Error Handling                      | Ignoring it in `useEffect`.                | Embrace error boundaries & try-catch. | Keep your app sturdy and resilient. |
 
 ## Before You Go
 
 So, what do you think? `useEffect` isn't that cryptic, right? It's all about finding the right tool for the job and keeping things as uncomplicated as possible. Remember, every line of code is a conversation with React. Keep it simple, keep it neat, and let React do its thing. Happy coding, my friend!
+
+## References
+
+- React Documentation. "[You Might Not Need an Effect – React](https://react.dev/learn/you-might-not-need-an-effect)."
+- DEV Community. "[Don't use useEffect - DEV Community](https://dev.to/rem0nfawzi/dont-use-useeffect-3ca8)."
+- Dan Abramov on Twitter. "[There’s 'You Might Not Need useEffect' somewhere in here...](https://twitter.com/dan_abramov/status/1281669881667162112?s=20)."
+- Reddit - r/reactjs. "[Thoughts on avoiding useEffect/useState when possible in React?](https://www.reddit.com/r/reactjs/comments/17q3d1l/thoughts_on_avoiding_useeffectusestate_when/)."
+- TkDodo's Blog. "[Simplifying useEffect](https://tkdodo.eu/blog/simplifying-use-effect#1-write-fewer-effects)."
