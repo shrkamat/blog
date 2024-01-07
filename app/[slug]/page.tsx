@@ -2,12 +2,14 @@ import CopyToClipboard from "@/components/CopyToClipboard";
 import Footer from "@/components/footer";
 import { ModeToggle } from "@/components/mode-toggle";
 import ScrollProgress from "@/components/scroll-progress";
+import TableExport from "@/components/table-export";
 import fs from "fs";
 import matter from "gray-matter";
-import { ArrowLeft, Copy } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import Link from "next/link";
 import path from "path";
+import { useRef } from "react";
 import rehypeHighlight from "rehype-highlight";
 import remarkGfm from "remark-gfm";
 
@@ -81,6 +83,14 @@ export default function Page({ params }: any) {
                 return <code className="">{props.children}</code>;
               },
               a: (props) => <a target="_blank" {...props} />,
+              table: (props) => {
+                return (
+                  <div className="group flex relative">
+                    <table {...props} />
+                    <TableExport tableChildren={props.children} />
+                  </div>
+                );
+              },
             }}
           ></MDXRemote>
         </div>
