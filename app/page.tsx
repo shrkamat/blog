@@ -1,8 +1,6 @@
-import Image from "next/image";
-import fs from "fs";
-import path from "path";
-import matter from "gray-matter";
-import Link from "next/link";
+import Footer from "@/components/footer";
+import { ModeToggle } from "@/components/mode-toggle";
+import { Badge } from "@/components/ui/badge";
 import {
   Card,
   CardContent,
@@ -11,14 +9,12 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { ModeToggle } from "@/components/mode-toggle";
-import { Switch } from "@/components/ui/switch";
-import { useState } from "react";
-import { Label } from "@/components/ui/label";
-import Footer from "@/components/footer";
+import fs from "fs";
+import matter from "gray-matter";
+import Link from "next/link";
+import path from "path";
 
-export default function Home() {
+export default function Home({ searchParams }) {
   const blogDir = "blogs";
 
   const files = fs.readdirSync(path.join(blogDir));
@@ -32,8 +28,9 @@ export default function Home() {
       slug: filename.replace(".mdx", ""),
     };
   });
+  console.log({ searchParams });
   return (
-    <main className="container pt-10 flex min-h-screen flex-col bg-background ">
+    <main className="container pt-10 flex min-h-screen flex-col bg-background max-w-[1200px]">
       <header className="h-10 flex justify-between">
         <div className="underline text-2xl">Vignesh Iyer</div>
         <ModeToggle />
@@ -41,10 +38,10 @@ export default function Home() {
       <br />
       <section>
         <h1 className="text-lg font-bold mb-2">Blogs</h1>
-        <div className="py-2 flex flex-col gap-3">
+        <div className="py-2 flex flex-col gap-4">
           {blogs.map((blog) => (
             <Link href={"/" + blog.slug} passHref key={blog.slug}>
-              <Card className="hover:outline hover:outline-purple-100 hover:shadow bg-purple-50 dark:bg-gradient-to-l dark:from-purple-400 dark:to-purple-700">
+              <Card className="hover:outline hover:outline-purple-100 hover:shadow bg-purple-50 dark:bg-gradient-to-l dark:from-purple-400 dark:to-purple-600 shadow dark:shadow-purple-800">
                 <CardHeader className="p-4">
                   <CardTitle>{blog.meta.title}</CardTitle>
                   <CardDescription>{blog.meta.date}</CardDescription>

@@ -1,8 +1,10 @@
-import type { Metadata } from "next";
-import { GeistSans } from "geist/font/sans";
-import { GeistMono } from "geist/font/mono";
-import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
+import { GeistMono } from "geist/font/mono";
+import { GeistSans } from "geist/font/sans";
+import type { Metadata } from "next";
+import Script from "next/script";
+import "./globals.css";
+
 export const metadata: Metadata = {
   title: "The Vignesh Iyer Blog",
   description: "Blog by Vignesh Iyer",
@@ -27,6 +29,7 @@ export default function RootLayout({
         >
           {children}
         </ThemeProvider>
+        <Script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" />
       </body>
     </html>
   );

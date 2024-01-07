@@ -1,10 +1,6 @@
 "use client";
 
-import { table } from "console";
-import { toBlob, toPng } from "html-to-image";
 import { FileJson, FileSpreadsheet } from "lucide-react";
-import { cloneElement, useRef } from "react";
-import { renderToStaticMarkup } from "react-dom/server";
 function parseTableData(tableData) {
   let headers = [];
   let rows = [];
