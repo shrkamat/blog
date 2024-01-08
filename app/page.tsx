@@ -20,6 +20,7 @@ export default function Home({ searchParams }) {
   const searchKey = searchParams.search;
   const files = fs.readdirSync(path.join(blogDir));
 
+  
   const blogs =
     files
       .map((filename) => {
