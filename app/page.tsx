@@ -20,7 +20,7 @@ export default function Home({ searchParams }) {
   const searchKey = searchParams.search;
   let files = [];
   try {
-    files = fs.readdirSync(path.join(blogDir));
+    files = fs.readdirSync(path.join(process.cwd(), blogDir));
   } catch (e) {
     throw new Error("File read error");
   }
