@@ -1,3 +1,4 @@
+import BlogFilter from "@/components/blog-filter";
 import Footer from "@/components/footer";
 import { ModeToggle } from "@/components/mode-toggle";
 import { Badge } from "@/components/ui/badge";
@@ -16,19 +17,27 @@ import path from "path";
 
 export default function Home({ searchParams }) {
   const blogDir = "blogs";
-
+  const searchKey = searchParams.search;
   const files = fs.readdirSync(path.join(blogDir));
 
-  const blogs = files.map((filename) => {
-    const fileContent = fs.readFileSync(path.join(blogDir, filename), "utf-8");
+  const blogs =
+    files
+      .map((filename) => {
+        const fileContent = fs.readFileSync(
+          path.join(blogDir, filename),
+          "utf-8"
+        );
 
-    const { data: frontMatter } = matter(fileContent);
-    return {
-      meta: frontMatter,
-      slug: filename.replace(".mdx", ""),
-    };
-  });
-  console.log({ searchParams });
+        const { data: frontMatter } = matter(fileContent);
+        return {
+          meta: frontMatter,
+          slug: filename.replace(".mdx", ""),
+        };
+      })
+      ?.filter((blog) => {
+        return blog.meta.title.includes(searchKey);
+      }) ?? [];
+
   return (
     <main className="container pt-10 flex min-h-screen flex-col bg-background max-w-[1200px]">
       <header className="h-10 flex justify-between">
@@ -37,7 +46,10 @@ export default function Home({ searchParams }) {
       </header>
       <br />
       <section>
-        <h1 className="text-lg font-bold mb-2">Blogs</h1>
+        <div className="flex justify-between mb-2">
+          <h1 className="text-lg font-bold ">Blogs</h1>
+          <BlogFilter />
+        </div>
         <div className="py-2 flex flex-col gap-4">
           {blogs.map((blog) => (
             <Link href={"/" + blog.slug} passHref key={blog.slug}>
