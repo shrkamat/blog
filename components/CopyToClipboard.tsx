@@ -27,7 +27,7 @@ const CopyToClipboard = () => {
             }, 1000);
             navigator.clipboard.writeText(window.location.href);
           }}
-          className="cursor-pointer"
+        //   className="cursor-pointer"
         />
       )}
     </div>

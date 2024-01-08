@@ -20,7 +20,6 @@ export default function Home({ searchParams }) {
   const searchKey = searchParams.search;
   const files = fs.readdirSync(path.join(blogDir));
 
-  
   const blogs =
     files
       .map((filename) => {
@@ -36,13 +35,15 @@ export default function Home({ searchParams }) {
         };
       })
       ?.filter((blog) => {
-        return blog.meta.title.includes(searchKey);
+        return searchKey
+          ? blog.meta.title.toLowerCase().includes(searchKey.toLowerCase())
+          : true;
       }) ?? [];
 
   return (
-    <main className="container pt-10 flex min-h-screen flex-col bg-background max-w-[1200px]">
-      <header className="h-10 flex justify-between">
-        <div className="underline text-2xl">Vignesh Iyer</div>
+    <main className="container flex pt-10 min-h-screen flex-col bg-background ">
+      <header className="h-10 flex justify-between ">
+        <div className="text-2xl">Vignesh Iyer</div>
         <ModeToggle />
       </header>
       <br />
@@ -51,24 +52,24 @@ export default function Home({ searchParams }) {
           <h1 className="text-lg font-bold ">Blogs</h1>
           <BlogFilter />
         </div>
-        <div className="py-2 flex flex-col gap-4">
+        <div className="py-2 flex flex-col gap-6">
           {blogs.map((blog) => (
             <Link href={"/" + blog.slug} passHref key={blog.slug}>
               <Card className="hover:outline hover:outline-purple-100 hover:shadow bg-purple-50 dark:bg-gradient-to-l dark:from-purple-400 dark:to-purple-600 shadow dark:shadow-purple-800">
-                <CardHeader className="p-4">
+                <CardHeader className="p-4 pb-2">
                   <CardTitle>{blog.meta.title}</CardTitle>
                   <CardDescription>{blog.meta.date}</CardDescription>
                 </CardHeader>
-                <CardContent className="px-4">
+                <CardContent className="px-4 pb-4">
                   <p>{blog.meta.description}</p>
                 </CardContent>
-                <CardFooter className="flex gap-2 px-4 overflow-x-hidden pt-1">
+                <CardFooter className="flex gap-2 px-4 overflow-x-hidden pt-1 flex-wrap">
                   {blog.meta.tags.map((tag, index) => {
                     return (
                       <Badge
                         key={index}
                         variant={"outline"}
-                        className="outline outline-1"
+                        className="outline outline-1 flex"
                       >
                         {tag}
                       </Badge>

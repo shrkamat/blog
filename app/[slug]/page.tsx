@@ -52,7 +52,7 @@ export default function Page({ params }: any) {
   const props = getPost(params);
   const highlightWords = props.fontMatter?.highlightWords ?? [];
   return (
-    <section className="flex min-h-screen flex-col max-w-[1200px]">
+    <section className="flex min-h-screen flex-col container">
       <article className="pb-8">
         <div className="mb-4 sticky top-0 bg-background h-fit z-10">
           <ScrollProgress />
@@ -70,7 +70,7 @@ export default function Page({ params }: any) {
           </div>
         </div>
 
-        <div className="container prose prose-lg dark:prose-invert dark:prose-pre:bg-slate-100 prose-pre:shadow dark:prose-pre:text-slate-800  text-primary p-3 h-full rounded overflow-y-auto prose-pre:shadow-purple-200">
+        <div className="container px-8 prose prose-lg dark:prose-invert dark:prose-pre:bg-slate-100 prose-pre:shadow dark:prose-pre:text-slate-800  text-primary p-3 h-full rounded overflow-y-auto prose-pre:shadow-purple-200">
           <MDXRemote
             options={options}
             source={props.content}

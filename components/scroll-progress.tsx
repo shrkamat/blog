@@ -19,9 +19,9 @@ const ScrollProgress = () => {
       <Progress value={scrollProgress} className="w-full h-1 " />
       {showNavigateToTop && (
         <div className="fixed bottom-14 right-10 " title="Scroll to Top">
-          <Button variant="outline" size="icon">
+          <Button variant="outline" size="icon" className="cursor-auto">
             <ChevronsUp
-              className="cursor-pointer transition-all"
+              className="transition-all"
               onClick={scrollToTop}
             />
             <span className="sr-only">Scroll to top</span>

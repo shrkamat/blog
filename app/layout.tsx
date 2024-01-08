@@ -29,7 +29,6 @@ export default function RootLayout({
         >
           {children}
         </ThemeProvider>
-        <Script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" />
       </body>
     </html>
   );

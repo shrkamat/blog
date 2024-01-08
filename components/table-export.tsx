@@ -62,12 +62,16 @@ const TableExport = ({ tableChildren }) => {
     <div className="hidden group-hover:animate-slide-in-animation group-hover:flex items-center gap-2 absolute right-0 ">
       <div className="text-sm">Export</div>
       <span title="Download JSON format">
-        <FileJson size={16} className="cursor-pointer" onClick={downloadJSON} />
+        <FileJson
+          size={16}
+          // className="cursor-pointer"
+          onClick={downloadJSON}
+        />
       </span>
       <span title="Download CSV format">
         <FileSpreadsheet
           size={16}
-          className="cursor-pointer"
+          //   className="cursor-pointer"
           onClick={downloadCSV}
         />
       </span>

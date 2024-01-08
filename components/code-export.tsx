@@ -28,7 +28,7 @@ const CodeExport = (props) => {
                 navigator.clipboard.writeText(text);
               }
             }}
-            className="cursor-pointer"
+            // className="cursor-pointer"
           />
         )}
       </div>
