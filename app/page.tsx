@@ -18,7 +18,12 @@ import path from "path";
 export default function Home({ searchParams }) {
   const blogDir = "blogs";
   const searchKey = searchParams.search;
-  const files = fs.readdirSync(path.join(blogDir));
+  let files = [];
+  try {
+    files = fs.readdirSync(path.join(blogDir));
+  } catch (e) {
+    throw new Error("File read error");
+  }
 
   const blogs =
     files
