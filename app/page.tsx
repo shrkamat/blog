@@ -12,6 +12,7 @@ import {
 } from "@/components/ui/card";
 import fs from "fs";
 import matter from "gray-matter";
+import Image from "next/image";
 import Link from "next/link";
 import path from "path";
 
@@ -48,7 +49,9 @@ export default function Home({ searchParams }) {
   return (
     <main className="container flex pt-10 min-h-screen flex-col bg-background ">
       <header className="h-10 flex justify-between ">
-        <div className="text-2xl">Vignesh Iyer</div>
+        <div className="text-2xl flex items-center">
+          <Image src={"/avatar.png"} alt="avatar" width={40} height={40} className="h-fit" />Vignesh Iyer
+        </div>
         <ModeToggle />
       </header>
       <br />
