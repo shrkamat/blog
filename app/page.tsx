@@ -48,11 +48,11 @@ export default function Home({ searchParams }) {
       </header>
       <br />
       <section>
-        <div className="flex justify-between mb-2">
+        <div className="flex justify-between mb-2 ">
           <h1 className="text-lg font-bold ">Blogs</h1>
           <BlogFilter />
         </div>
-        <div className="py-2 flex flex-col gap-6">
+        <div className="py-2 flex flex-col gap-6 pb-4">
           {blogs.map((blog) => (
             <Link href={"/" + blog.slug} passHref key={blog.slug}>
               <Card className="hover:outline hover:outline-purple-100 hover:shadow bg-purple-50 dark:bg-gradient-to-l dark:from-purple-400 dark:to-purple-600 shadow dark:shadow-purple-800">
@@ -61,7 +61,7 @@ export default function Home({ searchParams }) {
                   <CardDescription>{blog.meta.date}</CardDescription>
                 </CardHeader>
                 <CardContent className="px-4 pb-4">
-                  <p>{blog.meta.description}</p>
+                  <p className="line-clamp-3">{blog.meta.description}</p>
                 </CardContent>
                 <CardFooter className="flex gap-2 px-4 overflow-x-hidden pt-1 flex-wrap">
                   {blog.meta.tags.map((tag, index) => {
