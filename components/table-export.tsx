@@ -1,18 +1,21 @@
 "use client";
 
 import { FileJson, FileSpreadsheet } from "lucide-react";
-function parseTableData(tableData) {
-  let headers = [];
-  let rows = [];
+import { JSXElementConstructor, ReactElement } from "react";
+function parseTableData(tableData: { children: any }) {
+  let headers: any[] = [];
+  let rows: any[] = [];
 
-  tableData.children.forEach((child) => {
+  tableData.children.forEach((child: ReactElement) => {
     if (child.type === "thead") {
-      child.props.children.props.children.forEach((th) => {
+      child.props.children.props.children.forEach((th: ReactElement) => {
         headers.push(th.props.children);
       });
     } else if (child.type === "tbody") {
-      child.props.children.forEach((tr) => {
-        const row = tr.props.children.map((td) => td.props.children);
+      child.props.children.forEach((tr: ReactElement) => {
+        const row = tr.props.children.map(
+          (td: ReactElement) => td.props.children
+        );
         rows.push(row);
       });
     }
@@ -21,12 +24,20 @@ function parseTableData(tableData) {
   return { headers, rows };
 }
 
-function convertToJSON(props) {
+function convertToJSON(props: {
+  children:
+    | ReactElement<any, string | JSXElementConstructor<any>>
+    | [ReactElement<any, string | JSXElementConstructor<any>>];
+}) {
   const { headers, rows } = parseTableData(props);
   return JSON.stringify({ headers, rows }, null, 2);
 }
 
-function convertToCSV(props) {
+function convertToCSV(props: {
+  children:
+    | ReactElement<any, string | JSXElementConstructor<any>>
+    | [ReactElement<any, string | JSXElementConstructor<any>>];
+}) {
   const { headers, rows } = parseTableData(props);
   let csvContent = headers.join(",") + "\n";
 
@@ -36,12 +47,20 @@ function convertToCSV(props) {
 
   return csvContent;
 }
-const TableExport = ({ tableChildren }) => {
+const TableExport = ({
+  tableChildren,
+}: {
+  tableChildren: ReactElement | [ReactElement];
+}) => {
   const fileContents = {
     json: convertToJSON({ children: tableChildren }),
     csv: convertToCSV({ children: tableChildren }),
   };
-  const downloadFile = (content, fileName, contentType) => {
+  const downloadFile = (
+    content: BlobPart,
+    fileName: string,
+    contentType: string
+  ) => {
     const blob = new Blob([content], { type: contentType });
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
@@ -61,19 +80,17 @@ const TableExport = ({ tableChildren }) => {
   return (
     <div className="hidden group-hover:animate-slide-in-animation group-hover:flex items-center gap-2 absolute right-0 ">
       <div className="text-sm">Export</div>
-      <span title="Download JSON format">
-        <FileJson
-          size={16}
-          // className="cursor-pointer"
-          onClick={downloadJSON}
-        />
+      <span
+        title="Download JSON format"
+        className="p-1 hover:bg-primary/5 dark:bg-secondary/5 rounded"
+      >
+        <FileJson size={16} onClick={downloadJSON} />
       </span>
-      <span title="Download CSV format">
-        <FileSpreadsheet
-          size={16}
-          //   className="cursor-pointer"
-          onClick={downloadCSV}
-        />
+      <span
+        title="Download CSV format"
+        className="p-1 hover:bg-primary/5 dark:bg-secondary/5 rounded"
+      >
+        <FileSpreadsheet size={16} onClick={downloadCSV} />
       </span>
     </div>
   );

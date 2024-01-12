@@ -14,6 +14,7 @@ import remarkGfm from "remark-gfm";
 // import "./github-dark.css";
 import "./github.css";
 import CodeExport from "@/components/code-export";
+import { Metadata, ResolvingMetadata } from "next";
 // import "./default.css";
 
 const options = {
@@ -31,6 +32,27 @@ export async function generateStaticParams() {
   }));
 
   return paths;
+}
+
+export async function generateMetadata(
+  { params }: any,
+  parent: ResolvingMetadata
+): Promise<Metadata> {
+  // read route params
+  const props = getPost(params);
+
+  return {
+    title: props.fontMatter.title,
+    description: props.fontMatter.description,
+    authors: [props.fontMatter.author],
+    keywords: props.fontMatter.tags,
+    openGraph: {
+      title: props.fontMatter.title,
+      description: props.fontMatter.description,
+      type: "article",
+      images: [props.fontMatter.coverImageSrc],
+    },
+  };
 }
 
 function getPost({ slug }: { slug: string }) {

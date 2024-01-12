@@ -10,7 +10,7 @@ const CopyToClipboard = () => {
   return (
     <div
       className={cn(
-        "group-hover:block transition-all group-hover:animate-slide-in-animation",
+        "group-hover:block transition-all dark:text-secondary group-hover:animate-slide-in-animation hover:bg-primary/5 dark:hover:bg-secondary/5 p-1 rounded",
         !showCheck ? "hidden" : "block"
       )}
       title="Copy link"

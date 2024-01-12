@@ -44,13 +44,28 @@ export default function Home({ searchParams }) {
         return searchKey
           ? blog.meta.title.toLowerCase().includes(searchKey.toLowerCase())
           : true;
+      })
+      .sort(function (
+        a: { meta: { [key: string]: any }; slug: string },
+        b: { meta: { [key: string]: any }; slug: string }
+      ) {
+        // Turn your strings into dates, and then subtract them
+        // to get a value that is either negative, positive, or zero.
+        return new Date(b.meta.date) - new Date(a.meta.date);
       }) ?? [];
 
   return (
     <main className="container flex pt-10 min-h-screen flex-col bg-background ">
       <header className="h-10 flex justify-between ">
         <div className="text-2xl flex items-center">
-          <Image src={"/avatar.png"} alt="avatar" width={40} height={40} className="h-fit" />Vignesh Iyer
+          <Image
+            src={"/avatar.png"}
+            alt="avatar"
+            width={40}
+            height={40}
+            className="h-fit"
+          />
+          Vignesh Iyer
         </div>
         <ModeToggle />
       </header>

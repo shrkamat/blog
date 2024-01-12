@@ -1,0 +1,233 @@
+---
+title: "Building a SOLID Pokémon Game in React: A Developer’s Adventure!"
+date: "2024-02-10"
+author: "Vignesh Iyer"
+description: "Embark on an adventurous journey to apply SOLID principles in a React Pokémon game app. Explore practical examples, insightful tips, and a helpful cheatsheet to master these principles for robust and scalable React development."
+tags:
+  [
+    "React",
+    "SOLID Principles",
+    "Game Development",
+    "Pokémon",
+    "Software Architecture",
+    "Web Development",
+  ]
+highlightWords: ["SOLID", "React", "Pokémon"]
+coverImageSrc: "/pokemon.png"
+---
+
+# "Building a SOLID Pokémon Game in React: A Developer’s Adventure!"
+
+![Cover Image](/pokemon.png)
+
+## S: Single Responsibility - One Pokémon, One Job
+
+**The Problem**: Our `PokemonComponent` is overloaded – it manages catching Pokémon, handling battles, and keeping score.
+
+```jsx
+// A multitasking Pokémon component
+function PokemonComponent({ pokemon, onCatch, onBattle, score }) {
+  // Handling catching Pokémon
+  const handleCatch = () => {
+    onCatch(pokemon);
+  };
+
+  // Handling Pokémon battles
+  const handleBattle = () => {
+    onBattle(pokemon);
+  };
+
+  return (
+    <div>
+      <h2>{pokemon.name}</h2>
+      <button onClick={handleCatch}>Catch {pokemon.name}</button>
+      <button onClick={handleBattle}>Battle {pokemon.name}</button>
+      <div>Score: {score}</div> // Displaying the score
+    </div>
+  );
+}
+```
+
+**The SOLID Solution**: Let's specialize like a Pokémon Gym! We create separate components for each function.
+
+```jsx
+// A component focused on catching Pokémon
+function PokemonCatcher({ pokemon, onCatch }) {
+  return <button onClick={() => onCatch(pokemon)}>Catch {pokemon.name}</button>;
+}
+
+// A component dedicated to handling Pokémon battles
+function PokemonBattler({ pokemon, onBattle }) {
+  return (
+    <button onClick={() => onBattle(pokemon)}>Battle {pokemon.name}</button>
+  );
+}
+
+// A component for displaying the score
+function ScoreBoard({ score }) {
+  return <div>Score: {score}</div>;
+}
+
+// The parent component that uses the refactored components
+function PokemonGame({ pokemon, onCatch, onBattle, score }) {
+  return (
+    <div>
+      <h2>{pokemon.name}</h2>
+      <PokemonCatcher pokemon={pokemon} onCatch={onCatch} />
+      <PokemonBattler pokemon={pokemon} onBattle={onBattle} />
+      <ScoreBoard score={score} />
+    </div>
+  );
+}
+```
+
+## O: Open/Closed - Evolving Pokémon Components
+
+**The Problem**: Our Pokémon app needs to adapt and grow, introducing new features like power-ups, without rewriting existing components.
+
+**The SOLID Solution**: We apply the Open/Closed Principle by using a Higher-Order Component (HOC) to extend our Pokémon components. This approach allows us to add new functionalities, like power-ups, while keeping our existing components untouched.
+
+```javascript
+// Higher-Order Component to add power-up functionality
+function withPokemonPowerUp(PokemonComponent) {
+  return function PoweredUpPokemonComponent(props) {
+    const [isPoweredUp, setIsPoweredUp] = useState(false);
+
+    const handlePowerUpClick = () => {
+      setIsPoweredUp(true);
+      // Power-up lasts for 5 seconds
+      setTimeout(() => setIsPoweredUp(false), 5000);
+    };
+
+    return (
+      <div>
+        <PokemonComponent {...props} isPoweredUp={isPoweredUp} />
+        <button onClick={handlePowerUpClick}>Power Up!</button>
+        {isPoweredUp && <div className="power-up">Power Up Activated!</div>}
+      </div>
+    );
+  };
+}
+
+// Basic Charmander component for demonstration
+function Charmander({ isPoweredUp }) {
+  return (
+    <div>
+      <h2>Charmander {isPoweredUp ? '(Powered Up!)' : ''}</h2>
+      <img src={`charmander${isPoweredUp ? '_powered' : ''}.png`} alt="Charmander" />
+    </div>
+  );
+}
+
+// Apply the HOC to Charmander
+const PoweredUpCharmander = withPokemonPowerUp(Charmander);
+
+// Using PoweredUpCharmander in the app
+function PokemonApp() {
+  return (
+    <div>
+      <h1>Pokémon Power-Up Simulator</h1>
+      <PoweredUpCharmander />
+    </div>
+  );
+}
+```
+
+In this implementation, we enhance the `Charmander` component with a `withPokemonPowerUp` HOC. The `PoweredUpCharmander` component now has a "Power Up!" button, allowing users to trigger a power-up effect. This approach adheres to the Open/Closed Principle by allowing us to extend the functionality of our component without modifying its existing code.
+
+---
+
+## L: Liskov Substitution - The Interchangeable Pokémon
+
+**The Problem**: In our Pokémon game, swapping one Pokémon component for another sometimes causes issues, breaking the flexibility and reusability of our components.
+
+**The SOLID Solution**: Our components should be like Pokémon moves – interchangeable without affecting the game's functionality. This is where the Liskov Substitution Principle comes into play.
+
+```javascript
+// BasePokemon component
+function BasePokemon({ attack, children }) {
+  return (
+    <div className="pokemon">
+      <div>Attack: {attack}</div>
+      {children}
+    </div>
+  );
+}
+
+// Pikachu component extends BasePokemon
+function Pikachu({ attack }) {
+  return (
+    <BasePokemon attack={attack}>
+      <h2>Pikachu</h2>
+      <img src="pikachu.png" alt="Pikachu" />
+      {/* Pikachu specific functionality */}
+    </BasePokemon>
+  );
+}
+
+// Charizard component extends BasePokemon
+function Charizard({ attack }) {
+  return (
+    <BasePokemon attack={attack}>
+      <h2>Charizard</h2>
+      <img src="charizard.png" alt="Charizard" />
+      {/* Charizard specific functionality */}
+    </BasePokemon>
+  );
+}
+
+// Using the components interchangeably
+function PokemonBattle() {
+  return (
+    <div>
+      <h1>Pokémon Battle</h1>
+      <BasePokemon attack="Tackle">
+        <h2>Generic Pokémon</h2>
+      </BasePokemon>
+      <Pikachu attack="Thunderbolt" />
+      <Charizard attack="Flamethrower" />
+    </div>
+  );
+}
+```
+
+In this setup, `BasePokemon` provides a generic structure for any Pokémon, while `Pikachu` and `Charizard` extend this base component with their unique characteristics. In the `PokemonBattle` component, we can use `BasePokemon`, `Pikachu`, and `Charizard` interchangeably without any issues, adhering to the Liskov Substitution Principle. Each Pokémon component maintains its own identity and functionality while fitting perfectly into the broader system.
+
+---
+
+## D: Dependency Inversion - Depend on Abstractions
+
+**The Problem**: Our Pokémon components are tightly coupled with specific data sources.
+
+**The SOLID Solution**: We use context or props to inject dependencies, promoting flexibility and testability.
+
+```jsx
+const PokemonDataContext = createContext();
+
+function Pikachu() {
+  const { type, attack } = useContext(PokemonDataContext);
+  // Use Pokémon data without worrying about the source
+}
+
+// In use
+<PokemonDataContext.Provider
+  value={{ type: "Electric", attack: "Thunderbolt" }}
+>
+  <Pikachu />
+</PokemonDataContext.Provider>;
+```
+
+---
+
+## Cheatsheet: Pokémon Trainer’s Guide to SOLID
+
+| Principle             | Poké-Mantra                                      | Trainer’s Tip                                  |
+| --------------------- | ------------------------------------------------ | ---------------------------------------------- |
+| Single Responsibility | One Pokémon, one role.                           | Split complex components into focused ones.    |
+| Open/Closed           | Evolve without changing.                         | Use HOCs, render props for new features.       |
+| Liskov Substitution   | Components like Pokémon moves - interchangeable. | Ensure components can be used interchangeably. |
+| Dependency Inversion  | Depend on abstractions, not concretes.           | Use context or props for data management.      |
+
+---
+
+This approach ensures that each principle is clearly explained with relevant and practical examples from the Pokémon game app, providing a comprehensive and engaging guide to applying SOLID principles in React development.
