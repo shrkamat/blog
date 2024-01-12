@@ -113,8 +113,11 @@ function withPokemonPowerUp(PokemonComponent) {
 function Charmander({ isPoweredUp }) {
   return (
     <div>
-      <h2>Charmander {isPoweredUp ? '(Powered Up!)' : ''}</h2>
-      <img src={`charmander${isPoweredUp ? '_powered' : ''}.png`} alt="Charmander" />
+      <h2>Charmander {isPoweredUp ? "(Powered Up!)" : ""}</h2>
+      <img
+        src={`charmander${isPoweredUp ? "_powered" : ""}.png`}
+        alt="Charmander"
+      />
     </div>
   );
 }
@@ -230,4 +233,12 @@ function Pikachu() {
 
 ---
 
-This approach ensures that each principle is clearly explained with relevant and practical examples from the Pokémon game app, providing a comprehensive and engaging guide to applying SOLID principles in React development.
+## Resources
+
+To further enhance your understanding of SOLID principles in React and game development, here are some valuable resources:
+
+1. **React Documentation**: Dive deep into React concepts and hooks. [React Official Docs](https://react.dev/learn)
+2. **SOLID Principles Overview**: A comprehensive guide to SOLID principles. [SOLID Principles Explained](https://www.baeldung.com/solid-principles)
+3. **Pokémon Data API**: Utilize the Pokémon API for game development. [PokéAPI](https://pokeapi.co/)
+
+These resources will provide you with a broader understanding and practical insights into applying SOLID principles in a fun and engaging way.

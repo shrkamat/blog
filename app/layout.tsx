@@ -8,6 +8,7 @@ import "./globals.css";
 export const metadata: Metadata = {
   title: "The Vignesh Iyer Blog",
   description: "Blog by Vignesh Iyer",
+  icons: ["/avatar.png"]
 };
 
 export default function RootLayout({
