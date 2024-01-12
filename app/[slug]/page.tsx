@@ -50,7 +50,7 @@ export async function generateMetadata(
       title: props.fontMatter.title,
       description: props.fontMatter.description,
       type: "article",
-      images: [props.fontMatter.coverImageSrc],
+      images: props.fontMatter.coverImageSrc,
     },
   };
 }
