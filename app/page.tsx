@@ -80,7 +80,7 @@ export default function Home({ searchParams }) {
             height={40}
             className="h-fit"
           />
-          Vignesh Iyer
+          Your Name
         </div>
         <ModeToggle />
       </header>

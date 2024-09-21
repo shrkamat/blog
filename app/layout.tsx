@@ -6,8 +6,8 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "The Vignesh Iyer Blog",
-  description: "Blog by Vignesh Iyer",
+  title: "Next MDX Blog",
+  description: "A blog built with Next.js and MDX",
   icons: ["/avatar.png"]
 };
 

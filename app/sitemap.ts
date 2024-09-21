@@ -12,7 +12,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
         console.error(e);
         return [
             {
-                url: `https://vignesh-blog.vercel.app/`,
+                url: ``, // Add your site URL here
                 lastModified: new Date(),
                 changeFrequency: 'weekly',
                 priority: 1,
@@ -29,7 +29,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
             const { data: frontMatter } = matter(fileContent);
             return {
-                url: `https://vignesh-blog.vercel.app/${filename.replace(".mdx", "")}`,
+                url: `{Your-blog-url}/${filename.replace(".mdx", "")}`,
                 lastModified: new Date(frontMatter.date),
                 changeFrequency: 'weekly',
                 priority: 1,
